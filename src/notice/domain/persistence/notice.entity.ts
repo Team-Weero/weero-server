@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { UserEntity } from "src/user/domain/persistence/user.entity";
+import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity('tbl_notice')
 export class NoticeEntity{
@@ -18,6 +19,9 @@ export class NoticeEntity{
         nullable: false
     })
     contents: string;
+
+    @ManyToOne(() => UserEntity, (user) => user.notice)
+    user: UserEntity;
 
     constructor(
         title: string,
