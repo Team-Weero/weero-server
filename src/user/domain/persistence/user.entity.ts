@@ -6,12 +6,14 @@ export class UserEntity {
     id: string;
 
     @Column('varchar', {
+        name: 'password',
         length: 255 ,
         nullable: false
     })
     password: string;
 
     @Column('varchar', {
+        name: 'email',
         length: 255 ,
         nullable: false
     })
