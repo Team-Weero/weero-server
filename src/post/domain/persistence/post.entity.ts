@@ -5,6 +5,7 @@ import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColum
 @Entity('tbl_post')
 export class PostEntity{
     @PrimaryGeneratedColumn('uuid', { name: 'article_id' })
+    id: string;
 
     @Column('varchar', {
         name: 'title',
