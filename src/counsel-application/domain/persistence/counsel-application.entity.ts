@@ -1,5 +1,6 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { Period } from "../period";
+import { UserEntity } from "src/user/domain/persistence/user.entity";
 
 
 @Entity('tbl_counsel_application')
@@ -32,6 +33,9 @@ export class CounselApplicationEntity{
         nullable: false
     })
     applicationDate: Date;
+
+    @ManyToOne(() => UserEntity, (user) => user.application)
+    user: UserEntity;
 
     constructor(
         isChecked: boolean,
