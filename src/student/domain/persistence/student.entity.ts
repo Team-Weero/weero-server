@@ -1,5 +1,6 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 import { StudentRole } from "../student-role";
+import { UserEntity } from "src/user/domain/persistence/user.entity";
 
 @Entity('tbl_student')
 export class StudentEntity{
@@ -40,6 +41,9 @@ export class StudentEntity{
     })
     studentRole: StudentRole;
 
+    @OneToOne(() => UserEntity, (user) => user.student)
+    user: UserEntity;
+    
     constructor(
         name: string,
         nickname: string,
