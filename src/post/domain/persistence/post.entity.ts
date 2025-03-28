@@ -1,4 +1,6 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { AnswerEntity } from "src/answer/domain/persistence/answer.entity";
+import { UserEntity } from "src/user/domain/persistence/user.entity";
+import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity('tbl_post')
 export class PostEntity{
@@ -24,6 +26,13 @@ export class PostEntity{
     })
     date: Date;
 
+    @ManyToOne(() => UserEntity, (user) => user.post)
+    user: UserEntity;
+
+    @OneToMany(() => AnswerEntity, (answer) => answer.post)
+    @JoinColumn({name: 'answer_id' , referencedColumnName: 'id'})
+    answer: AnswerEntity[];
+
     constructor(
         title: string,
         contents: string,
@@ -33,5 +42,5 @@ export class PostEntity{
         this.contents = contents;
         this.date = date;
     }
-    
+
 }
