@@ -1,4 +1,6 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { ChatRoomEntity } from "src/chat-room/domain/persistence/chat-room.entity";
+import { UserEntity } from "src/user/domain/persistence/user.entity";
+import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity('tbl_message')
 export class MessageEntity{
@@ -24,6 +26,12 @@ export class MessageEntity{
         default: false
     })
     readStatus: boolean;
+
+    @ManyToOne(() => UserEntity, (user) => user.message)
+    user: UserEntity;
+
+    @ManyToOne(() => ChatRoomEntity, (chatroom) => chatroom.message)
+    chatroom: ChatRoomEntity;
 
     constructor(
         text: string,
