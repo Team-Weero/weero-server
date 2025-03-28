@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { UserEntity } from "src/user/domain/persistence/user.entity";
+import { Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity('tbl_teacher')
 export class TeacherEntity{
@@ -30,6 +31,9 @@ export class TeacherEntity{
         nullable: false
     })
     noNotificationEndTime: Date;
+
+    @OneToOne(() => UserEntity, (user) => user.teacher)
+    user: UserEntity;
 
     constructor(
         name: string,
