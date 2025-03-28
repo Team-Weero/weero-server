@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { PostEntity } from "src/post/domain/persistence/post.entity";
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity('tbl_answer')
 export class AnswerEntity {
@@ -11,6 +12,9 @@ export class AnswerEntity {
         nullable: false
     })
     answer: string;
+
+    @ManyToOne(() => PostEntity, (post) => post.answer)
+    post: PostEntity;
 
     constructor(
         answer: string
